@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../angular/angular.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module("InitModule", [])
+        var controller = app.controller("InitController", function ($scope) {
+            var Countries = [
+            {Name:'USA', Cities: [{Name:'San Diego'},{Name:'New York'}]},
+            { Name: 'India', Cities: [{ Name: 'Hyderabad' }, { Name: 'Chennai' }] }
+            ];
+            $scope.Countries = Countries;
+        });
+        
+    </script>
+</head>
+<body ng-app="InitModule">
+    <div ng-controller="InitController">
+        <ul>
+           <li ng-repeat="contr in Countries">
+               {{contr.Name}}
+               <ul ng-init="p = contr.Cities">
+                   <li ng-repeat="city in p" ng-init="p1= $index;q1= $parent.$index"> 
+                       {{city.Name}} index= {{p1}}  
+                       index1 = {{q1}}
+                   </li>
+               </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

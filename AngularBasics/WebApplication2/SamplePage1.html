@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="angular/angular.js"></script>
+    <script  type="text/javascript" >
+        var module = angular.module("MyModule", []);
+        module.controller("myController", function ($scope) {
+            var employee = [
+                { Fname: 'Saurabh', LName: 'Khare' },
+                { Fname: 'Gaurav', LName: 'Khare' },
+                { Fname: 'Aarav', LName: 'Khare' }
+            ]
+            $scope.employee = employee;
+        });
+    </script>
+</head>
+<body ng-app="MyModule" >
+    <div ng-controller="myController">
+         <table>
+             <thead>
+                 <th>First Name</th>
+                 <th>Last Name</th>
+             </thead>
+             <tbody>
+                 <tr ng-repeat="emp in employee | orderBy: 'Fname':false ">
+                     <td>{{emp.Fname}}</td>
+                     <td>{{emp.LName}}</td>
+                 </tr>
+             </tbody>
+         </table>
+    </div>
+</body>
+</html>

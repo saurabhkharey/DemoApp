@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../angular/angular.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module("NgincludeModule", [])
+        var controller = app.controller("NgIncludeController", function ($scope, $http,$log) {
+
+            var successCallBack = function (response)
+            {
+                $scope.employ = response.data;
+            }
+
+            var errorCallBack = function (reason) {
+                $scope.error = reason.data;
+            }
+
+            $http({ method: 'GET', url: 'EmployeeService.asmx/GetAllEmployees' }).then(successCallBack, errorCallBack);
+            //var employees = [
+            //{Name:'SK', Gender:'1', Salary:66000 },
+            //{ Name: 'PK', Gender: '2', Salary: 66000 },
+            //{ Name: 'JK', Gender: '1', Salary: 66000 },
+            //{ Name: 'DK', Gender: '2', Salary: 66000 },
+            //{ Name: 'EK', Gender: '3', Salary: 66000 },
+            //];
+            $scope.employeeView = "EmployeeTable.html";
+        });
+    </script>
+</head>
+<body ng-app="NgincludeModule">
+    <div ng-controller="NgIncludeController">
+        {{error}}
+        <br /><br />
+        <!--<div ng-include="'EmployeeTable.html'"></div>-->
+        <div ng-include="employeeView"></div>
+        <!--Note: NG-Include can take either $scope property which will have the Name of Html page or it will have directly the Html page-->
+    </div>
+</body>
+</html>
